@@ -24,6 +24,12 @@ open class RxTableViewSectionedAnimatedDataSource<S: AnimatableSectionModelType>
     /// Animation configuration for data source
     public var animationConfiguration: AnimationConfiguration
 
+    /// Perform batch updates without animations
+    public var disableAnimations = false
+
+    /// A completion handler block to execute when all of the operations are finished
+    public var dataSourceDidUpdate: ((Bool) -> Void)?
+
     /// Calculates view transition depending on type of changes
     public var decideViewTransition: DecideViewTransition
 
@@ -76,26 +82,30 @@ open class RxTableViewSectionedAnimatedDataSource<S: AnimatableSectionModelType>
     var dataSet = false
 
     open func tableView(_ tableView: UITableView, observedEvent: Event<Element>) {
+        let animationCompletionHandler = self.dataSourceDidUpdate
         Binder(self) { dataSource, newSections in
+            let reloadBlock = {
+                dataSource.setSections(newSections)
+                tableView.reloadData()
+                animationCompletionHandler?(true)
+            }
             #if DEBUG
                 dataSource._dataSourceBound = true
             #endif
             if !dataSource.dataSet {
                 dataSource.dataSet = true
-                dataSource.setSections(newSections)
-                tableView.reloadData()
+                reloadBlock()
             }
             else {
                 // if view is not in view hierarchy, performing batch updates will crash the app
                 if tableView.window == nil {
-                    dataSource.setSections(newSections)
-                    tableView.reloadData()
+                    reloadBlock()
                     return
                 }
                 let oldSections = dataSource.sectionModels
                 do {
                     let differences = try Diff.differencesForSectionedView(initialSections: oldSections, finalSections: newSections)
-                    
+
                     switch dataSource.decideViewTransition(dataSource, tableView, differences) {
                     case .animated:
                         // each difference must be run in a separate 'performBatchUpdates', otherwise it crashes.
@@ -107,24 +117,36 @@ open class RxTableViewSectionedAnimatedDataSource<S: AnimatableSectionModelType>
                                 tableView.batchUpdates(difference, animationConfiguration: dataSource.animationConfiguration)
                             }
                             if #available(iOS 11, tvOS 11, *) {
-                                tableView.performBatchUpdates(updateBlock, completion: nil)
+                                if self.disableAnimations {
+                                    UIView.performWithoutAnimation {
+                                        tableView.performBatchUpdates(updateBlock, completion: animationCompletionHandler)
+                                    }
+                                } else {
+                                    tableView.performBatchUpdates(updateBlock, completion: animationCompletionHandler)
+                                }
                             } else {
-                                tableView.beginUpdates()
-                                updateBlock()
-                                tableView.endUpdates()
+                                if self.disableAnimations {
+                                    UIView.performWithoutAnimation {
+                                        tableView.beginUpdates()
+                                        updateBlock()
+                                        tableView.endUpdates()
+                                    }
+                                } else {
+                                    tableView.beginUpdates()
+                                    updateBlock()
+                                    tableView.endUpdates()
+                                }
                             }
                         }
-                        
+
                     case .reload:
-                        dataSource.setSections(newSections)
-                        tableView.reloadData()
+                        reloadBlock()
                         return
                     }
                 }
                 catch let e {
                     rxDebugFatalError(e)
-                    dataSource.setSections(newSections)
-                    tableView.reloadData()
+                    reloadBlock()
                 }
             }
         }.on(observedEvent)
