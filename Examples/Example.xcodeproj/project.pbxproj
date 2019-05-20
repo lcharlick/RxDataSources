@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1E38DA572278D39400C07A09 /* RxRelay.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E38DA562278D39400C07A09 /* RxRelay.framework */; };
+		1E38DA582278D39400C07A09 /* RxRelay.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1E38DA562278D39400C07A09 /* RxRelay.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		845F61F41CCFD96800A8BE32 /* Example4_DifferentSectionAndItemTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845F61F31CCFD96800A8BE32 /* Example4_DifferentSectionAndItemTypes.swift */; };
 		845F61F71CCFDE6A00A8BE32 /* ImageTitleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845F61F61CCFDE6A00A8BE32 /* ImageTitleTableViewCell.swift */; };
 		845F61F91CCFDEA800A8BE32 /* TitleSwitchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845F61F81CCFDEA800A8BE32 /* TitleSwitchTableViewCell.swift */; };
@@ -63,12 +65,19 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		B6F732B321C01D3B0007F9D9 /* PBXContainerItemProxy */ = {
+		1E38DA552278D39400C07A09 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = C88AC6FC214D9BA800C1A3E5 /* Rx.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = C8165ABC21891AFF00494BEF;
-			remoteInfo = RxAtomic;
+			remoteGlobalIDString = A2897D53225CA1E7004EA481;
+			remoteInfo = RxRelay;
+		};
+		1E38DA592278D39400C07A09 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C88AC6FC214D9BA800C1A3E5 /* Rx.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = A2897CB3225CA1E7004EA481;
+			remoteInfo = RxRelay;
 		};
 		C82C3C591F3B937500309AE8 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -188,6 +197,7 @@
 				C87C34A31F363B3000DB85FE /* RxDataSources.framework in Embed Frameworks */,
 				C82C3C5C1F3B937500309AE8 /* Differentiator.framework in Embed Frameworks */,
 				C8241D7D214E75C6008C463E /* RxSwift.framework in Embed Frameworks */,
+				1E38DA582278D39400C07A09 /* RxRelay.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -282,6 +292,7 @@
 			files = (
 				C87C34A21F363B3000DB85FE /* RxDataSources.framework in Frameworks */,
 				C82C3C5B1F3B937500309AE8 /* Differentiator.framework in Frameworks */,
+				1E38DA572278D39400C07A09 /* RxRelay.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -349,9 +360,9 @@
 		C88AC6FD214D9BA800C1A3E5 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				B6F732B421C01D3B0007F9D9 /* RxAtomic.framework */,
 				C88AC715214D9BA800C1A3E5 /* RxSwift.framework */,
 				C88AC71D214D9BA800C1A3E5 /* RxCocoa.framework */,
+				1E38DA562278D39400C07A09 /* RxRelay.framework */,
 				C88AC725214D9BA800C1A3E5 /* RxBlocking.framework */,
 				C88AC72D214D9BA800C1A3E5 /* RxTest.framework */,
 				C88AC735214D9BA800C1A3E5 /* AllTests-iOS.xctest */,
@@ -531,6 +542,7 @@
 			dependencies = (
 				C87C34651F36353B00DB85FE /* PBXTargetDependency */,
 				C82C3C5A1F3B937500309AE8 /* PBXTargetDependency */,
+				1E38DA5A2278D39400C07A09 /* PBXTargetDependency */,
 			);
 			name = Example;
 			productName = Example;
@@ -591,6 +603,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 				Base,
 			);
@@ -615,11 +628,11 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		B6F732B421C01D3B0007F9D9 /* RxAtomic.framework */ = {
+		1E38DA562278D39400C07A09 /* RxRelay.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
-			path = RxAtomic.framework;
-			remoteRef = B6F732B321C01D3B0007F9D9 /* PBXContainerItemProxy */;
+			path = RxRelay.framework;
+			remoteRef = 1E38DA552278D39400C07A09 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		C88AC715214D9BA800C1A3E5 /* RxSwift.framework */ = {
@@ -826,6 +839,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		1E38DA5A2278D39400C07A09 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = RxRelay;
+			targetProxy = 1E38DA592278D39400C07A09 /* PBXContainerItemProxy */;
+		};
 		C82C3C5A1F3B937500309AE8 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = C82C3C531F3B937500309AE8 /* Differentiator */;
@@ -927,6 +945,7 @@
 				INFOPLIST_FILE = Sources/Differentiator/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACH_O_TYPE = staticlib;
 				PRODUCT_BUNDLE_IDENTIFIER = org.rxswiftcommunity.Differentiator;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -950,6 +969,7 @@
 				INFOPLIST_FILE = Sources/Differentiator/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACH_O_TYPE = staticlib;
 				PRODUCT_BUNDLE_IDENTIFIER = org.rxswiftcommunity.Differentiator;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -1094,6 +1114,7 @@
 				INFOPLIST_FILE = Sources/RxDataSources/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACH_O_TYPE = staticlib;
 				PRODUCT_BUNDLE_IDENTIFIER = kzaher.RxDataSources;
 				PRODUCT_NAME = RxDataSources;
 				SKIP_INSTALL = YES;
@@ -1117,6 +1138,7 @@
 				INFOPLIST_FILE = Sources/RxDataSources/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACH_O_TYPE = staticlib;
 				PRODUCT_BUNDLE_IDENTIFIER = kzaher.RxDataSources;
 				PRODUCT_NAME = RxDataSources;
 				SKIP_INSTALL = YES;

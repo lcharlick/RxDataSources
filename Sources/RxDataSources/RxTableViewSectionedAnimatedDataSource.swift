@@ -15,11 +15,11 @@ import RxCocoa
 #endif
 import Differentiator
 
-open class RxTableViewSectionedAnimatedDataSource<S: AnimatableSectionModelType>
-    : TableViewSectionedDataSource<S>
+open class RxTableViewSectionedAnimatedDataSource<Section: AnimatableSectionModelType>
+    : TableViewSectionedDataSource<Section>
     , RxTableViewDataSourceType {
-    public typealias Element = [S]
-    public typealias DecideViewTransition = (TableViewSectionedDataSource<S>, UITableView, [Changeset<S>]) -> ViewTransition
+    public typealias Element = [Section]
+    public typealias DecideViewTransition = (TableViewSectionedDataSource<Section>, UITableView, [Changeset<Section>]) -> ViewTransition
 
     /// Animation configuration for data source
     public var animationConfiguration: AnimationConfiguration
@@ -105,7 +105,6 @@ open class RxTableViewSectionedAnimatedDataSource<S: AnimatableSectionModelType>
                 let oldSections = dataSource.sectionModels
                 do {
                     let differences = try Diff.differencesForSectionedView(initialSections: oldSections, finalSections: newSections)
-
                     switch dataSource.decideViewTransition(dataSource, tableView, differences) {
                     case .animated:
                         // each difference must be run in a separate 'performBatchUpdates', otherwise it crashes.
@@ -147,6 +146,11 @@ open class RxTableViewSectionedAnimatedDataSource<S: AnimatableSectionModelType>
                 catch let e {
                     rxDebugFatalError(e)
                     reloadBlock()
+                }
+                catch let e {
+                    rxDebugFatalError(e)
+                    dataSource.setSections(newSections)
+                    tableView.reloadData()
                 }
             }
         }.on(observedEvent)
