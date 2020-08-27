@@ -5,7 +5,7 @@ import PackageDescription
 let package = Package(
   name: "RxDataSources",
   platforms: [
-    .iOS(.v8), .tvOS(.v9)
+    .iOS(.v9), .tvOS(.v9)
   ],
   products: [
     .library(name: "RxDataSources", targets: ["RxDataSources"]),
